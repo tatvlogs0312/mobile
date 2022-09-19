@@ -1,9 +1,9 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
-import Logo from '../Component/Logo'
-import Btn from '../Component/Btn'
+import { StyleSheet, Text, View } from 'react-native';
+import React from 'react';
+import Logo from '../Component/Logo';
+import Btn from '../Component/Btn';
 
-const Wellcome = () => {
+const Wellcome = ({navigation}) => {
   return (
     <View style={styles.container}>
       <Logo />
@@ -18,11 +18,21 @@ const Wellcome = () => {
           color={"white"}
           bgcolor={"#3498db"}
           bordercolor={"#3498db"}
+          handlerPress={() => {
+            navigation.navigate("Login");
+          }}
         />
       </View>
 
       <View>
-        <Btn title={"Sign up"} color={"#3498db"} bordercolor={"#3498db"} />
+        <Btn
+          title={"Sign up"}
+          color={"#3498db"}
+          bordercolor={"#3498db"}
+          handlerPress={() => {
+            navigation.navigate("Register");
+          }}
+        />
       </View>
     </View>
   );

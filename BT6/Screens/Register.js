@@ -1,11 +1,17 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View, TouchableWithoutFeedback } from "react-native";
 import React from 'react'
 import Input from "../Component/Input";
 import Btn from "../Component/Btn";
+import { AntDesign } from "@expo/vector-icons";
 
-const Register = () => {
+const Register = ({navigation}) => {
   return (
     <View style={styles.container}>
+      <View>
+        <TouchableWithoutFeedback onPress={() => {navigation.pop()}}>
+          <AntDesign name="back" size={24} color="black" style={{position:'absolute', top : -50, left:-25}}/>
+        </TouchableWithoutFeedback>
+      </View>
       <Text style={{ fontSize: 30, color: "#2980b9", marginBottom: 20 }}>
         Create new account
       </Text>

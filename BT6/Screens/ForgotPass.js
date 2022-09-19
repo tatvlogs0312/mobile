@@ -1,10 +1,10 @@
 import { StyleSheet, Text, View, TouchableWithoutFeedback } from "react-native";
-import React from "react";
-import Input from "../Component/Input";
-import Btn from "../Component/Btn";
+import React from 'react';
+import Input from '../Component/Input';
+import Btn from '../Component/Btn';
 import { AntDesign } from "@expo/vector-icons";
 
-const Login = ({ navigation }) => {
+const ForgotPass = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <View>
@@ -22,33 +22,22 @@ const Login = ({ navigation }) => {
         </TouchableWithoutFeedback>
       </View>
       <Text style={{ fontSize: 30, color: "#2980b9", marginBottom: 20 }}>
-        Sign In
+        Forgot Password
       </Text>
       <Input textPh={"Email or phone number"} />
-      <Input textPh={"Password"} />
       <View style={styles.btn}>
         <Btn
-          title={"Login"}
+          title={"Confirm"}
           bgcolor={"#3498db"}
           bordercolor={"#3498db"}
           color={"white"}
-        />
-        <Text style={{ fontSize: 20, marginVertical: 50 }}>OR</Text>
-        <Btn
-          title={"Forgot password"}
-          bgcolor={"#2980b9"}
-          bordercolor={"#2980b9"}
-          color={"white"}
-          handlerPress={() => {
-            navigation.navigate("ForgotPass");
-          }}
         />
       </View>
     </View>
   );
 };
 
-export default Login;
+export default ForgotPass
 
 const styles = StyleSheet.create({
   container: {
@@ -57,8 +46,8 @@ const styles = StyleSheet.create({
     marginTop: 100,
   },
 
-  btn:{
-    marginTop:20,
-    alignItems:'center',
-  }
+  btn: {
+    marginTop: 20,
+    alignItems: "center",
+  },
 });
