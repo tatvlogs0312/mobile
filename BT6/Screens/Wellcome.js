@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, SafeAreaView } from 'react-native';
 import React from 'react';
 import Logo from '../Component/Logo';
 import Btn from '../Component/Btn';
@@ -23,7 +23,7 @@ const Wellcome = ({navigation}) => {
           }}
         />
       </View>
-
+      
       <View>
         <Btn
           title={"Sign up"}
