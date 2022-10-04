@@ -7,6 +7,7 @@ import GlobalStyle from "../Utils/GlobalStyle";
 export default function Home({ navigation, route }) {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
+  const [name, setName] = React.useState("");
   useEffect(() => {
     getData();
   }, []);
@@ -19,6 +20,7 @@ export default function Home({ navigation, route }) {
           let user = JSON.parse(value);
           setEmail(user.Email);
           setPassword(user.Password);
+          setName(user.FullName);
         }
       });
     } catch (error) {
@@ -28,7 +30,6 @@ export default function Home({ navigation, route }) {
 
   const removeData = async () => {
     try {
-      await AsyncStorage.clear();
       navigation.navigate("Login");
     } catch (error) {
       console.log(error);
@@ -37,7 +38,7 @@ export default function Home({ navigation, route }) {
 
   return (
     <View style={styles.body}>
-      <Text>Wellcome {email}</Text>
+      <Text>wellcome {name}</Text>
       <Btn title="Logout" color="#f40100" handlerPress={removeData} />
     </View>
   );

@@ -35,21 +35,22 @@ const Login = ({ navigation }) => {
   const setData = async () => {
     if (email.length == 0 || password.length == 0) {
       Alert.alert("Warning!", "Please write your data.");
-    } 
-    else if(email == 'tanhtuan093@gmail.com' && password == 'Trantuan0312') {
-      try {
-        var user = {
-          Email: email,
-          Password: password,
-        };
-        await AsyncStorage.setItem("UserData", JSON.stringify(user));
-        navigation.navigate("Home");
-      } catch (error) {
-        console.log(error);
+    } else {
+      const regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+      if (!regex.test(email)) {
+        Alert.alert("Warning", "Please write exactly one email address");
+      } else {
+        AsyncStorage.getItem("UserData").then((value) => {
+          console.log("data : " + value);
+          let user = JSON.parse(value);
+          if (user.Email == email && user.Password == password) {
+            console.log(value);
+            navigation.navigate("Home");
+          } else {
+            Alert.alert("Warning", "Password is incorrect");
+          }
+        });
       }
-    }
-    else{
-      Alert.alert("Warning!", "Invalid email or password");
     }
   };
 
