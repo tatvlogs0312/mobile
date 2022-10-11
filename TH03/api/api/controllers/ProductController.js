@@ -43,4 +43,36 @@ module.exports = {
       res.json({ message: "Delete success!" });
     });
   },
+
+  sortByPriceAsc: (req, res) => {
+    let sql = "SELECT * FROM `products` GROUP BY price ASC";
+    db.query(sql, (err, response) => {
+      if (err) throw err;
+      res.json(response);
+    });
+  },
+
+  sortByPriceDesc: (req, res) => {
+    let sql = "SELECT * FROM `products` GROUP BY price DESC";
+    db.query(sql, (err, response) => {
+      if (err) throw err;
+      res.json(response);
+    });
+  },
+
+  getByDanhMuc: (req, res) => {
+    let sql = "SELECT * FROM products WHERE danhmuc = ?";
+    db.query(sql, [req.params.danhmuc], (err, response) => {
+      if (err) throw err;
+      res.json(response);
+    });
+  },
+
+  getDanhMuc : (req,res) => {
+    let sql = "SELECT DISTINCT danhmuc FROM products";
+    db.query(sql, (err, response) => {
+      if (err) throw err;
+      res.json(response);
+    });
+  }
 };

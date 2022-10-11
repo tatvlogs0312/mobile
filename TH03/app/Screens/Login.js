@@ -3,35 +3,18 @@ import {
   Text,
   View,
   TouchableWithoutFeedback,
-  Alert
+  Alert,
 } from "react-native";
 import React, { useState, useEffect } from "react";
 import Input from "../Component/Input";
 import Btn from "../Component/Btn";
 import { AntDesign } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import axios from 'axios';
+import axios, { Axios } from "axios";
 
 const Login = ({ navigation }) => {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
-
-  useEffect(() => {
-    getData();
-  }, []);
-
-  const getData = () => {
-    try {
-      AsyncStorage.getItem("UserData").then((value) => {
-        console.log(value);
-        if (value != null) {
-          navigation.navigate("Home");
-        }
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
   const setData = async () => {
     if (email.length == 0 || password.length == 0) {
@@ -41,7 +24,24 @@ const Login = ({ navigation }) => {
       if (!regex.test(email)) {
         Alert.alert("Warning", "Please write exactly one email address");
       } else {
-        
+        await axios
+          .post("http://192.168.64.12:3000/user/login", {
+            email: email,
+            password: password,
+          })
+          .then((reponse) => {
+            if (reponse.data) {
+              var user = {
+                Email: reponse.data.email,
+                Password: reponse.data.password,
+              };
+              AsyncStorage.setItem("UserData", JSON.stringify(user));
+              navigation.navigate("Home");
+            } else {
+              Alert.alert("Email hoặc mật khẩu không đúng");
+            }
+          })
+          .catch(() => {Alert("Email hoặc mật khẩu không đúng")});
       }
     }
   };
@@ -67,11 +67,11 @@ const Login = ({ navigation }) => {
       </Text>
       <Input
         textPh={"Email or phone number"}
-        handlerInput={email => setEmail(email)}
+        handlerInput={(email) => setEmail(email)}
       />
       <Input
         textPh={"Password"}
-        handlerInput={password => setPassword(password)}
+        handlerInput={(password) => setPassword(password)}
       />
       <View style={styles.btn}>
         <Btn

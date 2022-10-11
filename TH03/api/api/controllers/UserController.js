@@ -15,6 +15,7 @@ module.exports = {
   },
 
   register: (req, res) => {
+    console.log("aaa");
     let data = req.body;
     let sql =
       "INSERT INTO `user`(`name`, `phone_number`, `email`, `password`) VALUES (?,?,?,?)";
