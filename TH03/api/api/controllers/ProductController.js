@@ -6,7 +6,7 @@ const db = require("./../db");
 
 module.exports = {
   get: (req, res) => {
-    let sql = "SELECT * FROM products";
+    let sql = `SELECT * FROM products LIMIT 6 OFFSET ${req.query.offset}`;
     db.query(sql, (err, response) => {
       if (err) throw err;
       res.json(response);
@@ -61,7 +61,10 @@ module.exports = {
   },
 
   getByDanhMuc: (req, res) => {
-    let sql = "SELECT * FROM products WHERE danhmuc = ?";
+    console.log(req.query.offset);
+    console.log(req.query.danhmuc);
+
+    let sql = `SELECT * FROM products WHERE danhmuc = '${req.params.danhmuc}' LIMIT 6 OFFSET ${req.query.offset}`;
     db.query(sql, [req.params.danhmuc], (err, response) => {
       if (err) throw err;
       res.json(response);

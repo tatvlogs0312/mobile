@@ -25,7 +25,7 @@ const Login = ({ navigation }) => {
         Alert.alert("Warning", "Please write exactly one email address");
       } else {
         await axios
-          .post("http://192.168.64.12:3000/user/login", {
+          .post("http://192.168.129.12:3000/user/login", {
             email: email,
             password: password,
           })
@@ -36,12 +36,14 @@ const Login = ({ navigation }) => {
                 Password: reponse.data.password,
               };
               AsyncStorage.setItem("UserData", JSON.stringify(user));
-              navigation.navigate("Home");
+              navigation.navigate("Product");
             } else {
               Alert.alert("Email hoặc mật khẩu không đúng");
             }
           })
-          .catch(() => {Alert("Email hoặc mật khẩu không đúng")});
+          .catch(() => {
+            Alert("Email hoặc mật khẩu không đúng");
+          });
       }
     }
   };
